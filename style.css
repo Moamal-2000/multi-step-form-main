@@ -1,0 +1,440 @@
+/* Global styles [Start] */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eef5ff;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+p {
+  font-size: 16px;
+}
+
+.container {
+  width: 830px;
+  margin: 60px auto;
+  background-color: #fff;
+  display: flex;
+  padding: 14px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.container section {
+  padding: 40px 60px 10px 80px;
+  width: 100%;
+}
+
+.container section h2 {
+  color: #093162;
+  font-size: 28px;
+}
+
+.container section p {
+  color: #a2a3a7;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.steps-buttons-holder {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.steps-buttons-holder.step2 {
+  justify-content: space-between;
+}
+
+.steps-buttons-holder button.next-step {
+  background-color: #053675;
+  color: #f0f0f0;
+  padding: 12px 24px;
+  font-size: 14px;
+  border: solid 2px #053675;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.steps-buttons-holder button.next-step:hover {
+  color: #053675;
+  background-color: transparent;
+}
+
+.steps-buttons-holder button.back-step {
+  border: none;
+  background-color: transparent;
+  color: gray;
+  user-select: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.steps-buttons-holder button.back-step:hover {
+  color: #000;
+}
+/* Global styles [End] */
+
+
+
+
+
+
+
+/* Sidebar [Start] */
+.container .sidebar {
+  background-image: url('assets/images/bg-sidebar-desktop.svg');
+  padding: 30px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  width: 275px;
+  height: 566px;
+}
+
+.container .sidebar nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.container .sidebar nav ul li {
+  list-style: none;
+}
+
+.container .sidebar nav ul li a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.container .sidebar nav ul li a button {
+  border: solid 1px #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.container .sidebar nav ul li:hover a button {
+  background-color: rgba(190, 225, 253, 0.178);
+}
+
+.container .sidebar nav ul li.active a button {
+  border: none;
+  user-select: none;
+  background-color: #bee1fd;
+  color: #252525;
+}
+
+.container .sidebar nav ul li a div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.container .sidebar nav ul li a div .step {
+  color: #9496ff;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: -.1px;
+}
+
+.container .sidebar nav ul li a div span:last-child {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+/* Sidebar [End] */
+
+
+
+
+
+
+/* Step 1 [Start]*/
+/* .your-info-section {
+  padding: 40px 60px 10px 80px;
+  width: 100%;
+} */
+
+.your-info-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.your-info-section form .input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.your-info-section form .input label {
+  color: #3267a3;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.your-info-section form .input input {
+  width: 100%;
+  padding: 14px;
+  outline: none;
+  border: solid 1px #cfcfcf;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  letter-spacing: 1px;
+}
+
+.your-info-section form .input input::placeholder {
+  color: #888888;
+  font-size: 14px;
+}
+/* Step 1 [End]*/
+
+
+
+
+
+
+/* Step 2 [Start]*/
+.select-plan-section {
+
+}
+
+.select-plan-section h2 {
+
+}
+
+.select-plan-section p {
+
+}
+
+.select-plan-section .plans {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  height: 190px;
+}
+
+.select-plan-section .plans .plan {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 14px;
+  border: solid 1px #d2d2d2;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  width: 100%;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color .3s;
+  -webkit-transition: background-color .3s;
+  -moz-transition: background-color .3s;
+  -ms-transition: background-color .3s;
+  -o-transition: background-color .3s;
+}
+
+.select-plan-section .plans .plan.active {
+  border-width: 2px;
+  border-color: #655fa4;
+  background-color: #f8f9fe;
+  width: calc(100% - 2px);
+}
+
+.select-plan-section .plans .plan img {
+  width: 40px;
+}
+
+.select-plan-section .plans .plan div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.select-plan-section .plans .plan div h3 {
+  color: #093162;
+  font-size: 16px;
+}
+
+.select-plan-section .plans .plan div .price {
+  color: #a2a3a7;
+  font-size: 13px;
+}
+
+.select-plan-section .plans .plan div .discount {
+  color: #093162;
+  font-size: 12px;
+}
+
+.select-plan-section .select-sub {
+  background-color: #f8f9fe;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.select-plan-section .select-sub label {
+  color: #888888;
+  font-size: 14px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.select-plan-section .select-sub label:last-child {
+  justify-content: flex-start;
+}
+
+.select-plan-section .select-sub label.active {
+  font-weight: bold;
+  color: #093162;
+}
+
+.select-plan-section .select-sub #monthly-yearly {
+  width: 40px;
+  height: 20px;
+  background-color: #053675;
+  border-radius: 60px;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.select-plan-section .select-sub #monthly-yearly span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  background-color: #fff;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  transform: translateX(4px);
+  -webkit-transform: translateX(4px);
+  -moz-transform: translateX(4px);
+  -ms-transform: translateX(4px);
+  -o-transform: translateX(4px);
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+/* Step 2 [End]*/
+
+
+
+
+
+
+/* Step 3 [Start]*/
+
+/* Step 3 [End]*/
+
+
+
+
+
+
+/* Step 4 [Start]*/
+/* Step 4 [End]*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer {
+  padding: 40px;
+  background-color: #252525;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #6e9aff;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+footer a:hover {
+  color: #2768ff;
+}

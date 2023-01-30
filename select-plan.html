@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Multi-step form</title>
+  <!-- Main css file -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <main class="container">
+    <div class="sidebar">
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html">
+              <button type="button">1</button>
+              <div>
+                <span class="step">Step 1</span>
+                <span>Your Info</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="active">
+            <a href="select-plan.html">
+              <button type="button">2</button>
+              <div>
+                <span class="step">Step 2</span>
+                <span>Select Plan</span>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="add-ons.html">
+              <button type="button">3</button>
+              <div>
+                <span class="step">Step 3</span>
+                <span>Add-ons</span>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="summary.html">
+              <button type="button">4</button>
+              <div>
+                <span class="step">Step 4</span>
+                <span>Summary</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <section class="select-plan-section">
+        <h2>Select your plan</h2>
+        <p>You have the option of monthly or yearly billing.</p>
+
+      <div class="plans">
+        <div class="plan active">
+          <img src="assets/images/icon-arcade.svg" alt="">
+          <div>
+            <h3>Arcade</h3>
+            <span class="price">$9/mo</span>
+          </div>
+        </div>
+
+        <div class="plan">
+          <img src="assets/images/icon-advanced.svg" alt="">
+          <div>
+            <h3>Advanced</h3>
+            <span class="price">$12/mo</span>
+          </div>
+        </div>
+
+        <div class="plan">
+          <img src="assets/images/icon-pro.svg" alt="">
+          <div>
+            <h3>Pro</h3>
+            <span class="price">$15/mo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="select-sub">
+        <label class="monthly active">Monthly</label>
+        <div id="monthly-yearly"><span></span></div>
+        <label class="yearly">Yearly</label>
+      </div>
+
+      <div class="steps-buttons-holder step2">
+        <button class="back-step">Go Back</button>
+        <button class="next-step">Next Step</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="select-plan.js"></script>
+</body>
+
+</html>
