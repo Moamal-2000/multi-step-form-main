@@ -27,9 +27,18 @@ p {
   -o-border-radius: 10px;
 }
 
+/* @media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+} */
+
 .container section {
   padding: 40px 60px 10px 80px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container section h2 {
@@ -46,14 +55,12 @@ p {
 
 .steps-buttons-holder {
   width: 100%;
-  height: 160px;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: space-between;
 }
 
-.steps-buttons-holder.step2 {
-  justify-content: space-between;
+.container .your-info-section .steps-buttons-holder {
+  justify-content: flex-end;
 }
 
 .steps-buttons-holder button.next-step {
@@ -98,6 +105,7 @@ p {
 .steps-buttons-holder button.back-step:hover {
   color: #000;
 }
+
 /* Global styles [End] */
 
 
@@ -127,6 +135,7 @@ p {
 
 .container .sidebar nav ul li {
   list-style: none;
+  user-select: none;
 }
 
 .container .sidebar nav ul li a {
@@ -164,7 +173,6 @@ p {
 
 .container .sidebar nav ul li.active a button {
   border: none;
-  user-select: none;
   background-color: #bee1fd;
   color: #252525;
 }
@@ -189,6 +197,7 @@ p {
   font-weight: 500;
   letter-spacing: 1px;
 }
+
 /* Sidebar [End] */
 
 
@@ -237,6 +246,7 @@ p {
   color: #888888;
   font-size: 14px;
 }
+
 /* Step 1 [End]*/
 
 
@@ -245,18 +255,6 @@ p {
 
 
 /* Step 2 [Start]*/
-.select-plan-section {
-
-}
-
-.select-plan-section h2 {
-
-}
-
-.select-plan-section p {
-
-}
-
 .select-plan-section .plans {
   display: flex;
   align-items: flex-start;
@@ -382,6 +380,7 @@ p {
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
 }
+
 /* Step 2 [End]*/
 
 
@@ -390,6 +389,71 @@ p {
 
 
 /* Step 3 [Start]*/
+.add-ons-section .add-ons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-ons-section .add-ons .add {
+  padding: 25px;
+  border: solid 1px #d2d2d2;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -ms-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+}
+
+.add-ons-section .add-ons .add.active {
+  background-color: #f8f9fe;
+  border-width: 2px;
+  border-color: #655fa4;
+}
+
+.add-ons-section .add-ons .add input {
+  accent-color: #453ff9;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-ons-section .add-ons .add .text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 270px;
+}
+
+.add-ons-section .add-ons .add .text h3 {
+  color: #093162;
+  font-size: 16px;
+}
+
+.add-ons-section .add-ons .add .text p {
+  color: #959595;
+  margin: 0;
+}
+
+.add-ons-section .add-ons .add .price {
+  color: #3267a3;
+  font-size: 14px;
+}
 
 /* Step 3 [End]*/
 
@@ -399,19 +463,93 @@ p {
 
 
 /* Step 4 [Start]*/
+.finish-section .content .layout-content p,
+  .finish-section .content .layout-total p {
+  margin: 0;
+}
+
+.finish-section .layout-content {
+  background-color: #f8f9fe;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.finish-section .layout-content .first-line,
+.finish-section .layout-content .second-line,
+.finish-section .layout-content .third-line,
+.finish-section .layout-content .fourth-line,
+.finish-section .layout-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.finish-section .layout-content .first-line div .type-sub {
+  color: #053675;
+  font-size: 15px;
+}
+
+.finish-section .layout-content .first-line div button {
+  background-color: transparent;
+  border: none;
+  color: #959595;
+  text-decoration: underline;
+  font-size: 14px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.finish-section .layout-content .first-line .price-sub {
+  color: #053675;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.finish-section .layout-content hr {
+  border: solid 1px #eee;
+}
+
+
+.finish-section .layout-content .second-line p {
+  font-size: 14px;
+}
+
+.finish-section .layout-content .second-line span,
+.finish-section .layout-content .third-line span,
+.finish-section .layout-content .fourth-line span {
+  color: #053675;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.finish-section .layout-total {
+  padding: 20px;
+}
+
+.finish-section .layout-total .total-price {
+  color: #483efe;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.finish-section .confirm-button {
+  background-color: #483efe !important;
+  border-color: #483efe !important;
+}
+
+.finish-section .confirm-button:hover {
+  background-color: #fff !important;
+  color: #483efe !important;
+}
+
 /* Step 4 [End]*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
