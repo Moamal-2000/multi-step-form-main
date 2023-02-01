@@ -481,22 +481,22 @@ p {
   -o-border-radius: 10px;
 }
 
-.finish-section .layout-content .first-line,
-.finish-section .layout-content .second-line,
-.finish-section .layout-content .third-line,
-.finish-section .layout-content .fourth-line,
+.finish-section .layout-content .line,
+.finish-section .layout-content .line,
+.finish-section .layout-content .line,
+.finish-section .layout-content .line,
 .finish-section .layout-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.finish-section .layout-content .first-line div .type-sub {
+.finish-section .layout-content .line div .type-sub {
   color: #053675;
   font-size: 15px;
 }
 
-.finish-section .layout-content .first-line div button {
+.finish-section .layout-content .line div button {
   background-color: transparent;
   border: none;
   color: #959595;
@@ -506,7 +506,7 @@ p {
   cursor: pointer;
 }
 
-.finish-section .layout-content .first-line .price-sub {
+.finish-section .layout-content .line .price-sub {
   color: #053675;
   font-weight: bold;
   font-size: 15px;
@@ -517,13 +517,11 @@ p {
 }
 
 
-.finish-section .layout-content .second-line p {
+.finish-section .layout-content .line p {
   font-size: 14px;
 }
 
-.finish-section .layout-content .second-line span,
-.finish-section .layout-content .third-line span,
-.finish-section .layout-content .fourth-line span {
+.finish-section .layout-content .line span {
   color: #053675;
   font-size: 14px;
   font-weight: 500;

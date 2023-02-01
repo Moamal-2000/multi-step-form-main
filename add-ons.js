@@ -1,43 +1,38 @@
 "use strict";
 
-// localStorage.clear()
-
 const addOns = document.querySelectorAll(".add-ons-section .add-ons .add");
 const checkboxes = document.querySelectorAll(".add-ons .add input");
 const prices = document.querySelectorAll(".add-ons-section .add .price");
 
 
 
-
 function setSelectedAddOnsToLocal() {
-  let data = ''
+  let data = "";
   for (let i = 0; i < checkboxes.length; i++) {
-    data += ` ${checkboxes[i].dataset.checked}`
-    localStorage.setItem('selectedAddOns', data)
+    data += ` ${checkboxes[i].dataset.checked}`;
+    localStorage.setItem("selectedAddOns", data);
   }
 }
 
 
 
-
-addOns.forEach(addOn => {
-
+let addOnsText = "";
+let addOnsPrice = "";
+addOns.forEach((addOn) => {
   addOn.addEventListener("click", () => {
     addOn.classList.toggle("active");
 
     if (addOn.children[0].dataset.checked === "true") {
       addOn.children[0].dataset.checked = false;
       addOn.children[0].checked = false;
-      setSelectedAddOnsToLocal()
+      setSelectedAddOnsToLocal();
     } else {
       addOn.children[0].dataset.checked = true;
       addOn.children[0].checked = true;
-      setSelectedAddOnsToLocal()
+      setSelectedAddOnsToLocal();
     }
   });
-  
 });
-
 
 
 
@@ -56,34 +51,38 @@ if (monthlySub === "false") {
 
 const nextButton = document.querySelector(".steps-buttons-holder .next-step");
 const backButton = document.querySelector(".steps-buttons-holder .back-step");
-backButton.addEventListener("click", () => {
-  location.href = "select-plan.html";
-});
-
-nextButton.addEventListener("click", () => {
-  location.href = "summary.html";
-});
+backButton.addEventListener(
+  "click",
+  () => (location.href = "select-plan.html")
+);
+nextButton.addEventListener("click", () => (location.href = "summary.html"));
 
 
-let selectedAddOns = localStorage.getItem('selectedAddOns')
 
+let selectedAddOns = localStorage.getItem("selectedAddOns");
 if (selectedAddOns !== null) {
-  let selectedAddOnsArr = selectedAddOns.split(' ')
-  selectedAddOnsArr.shift()
+  let selectedAddOnsArr = selectedAddOns.split(" ");
+  selectedAddOnsArr.shift();
 
   addOns.forEach((addOn, i) => {
-    addOn.children[0].dataset.checked = selectedAddOnsArr[i]
-  
-    if (addOn.children[0].dataset.checked === 'true') {
-      addOn.children[0].checked = true
-      addOn.classList.add('active')
+    addOn.children[0].dataset.checked = selectedAddOnsArr[i];
+
+    if (addOn.children[0].dataset.checked === "true") {
+      addOn.children[0].checked = true;
+      addOn.classList.add("active");
     } else {
-      addOn.children[0].checked = false
-      addOn.classList.remove('active')
+      addOn.children[0].checked = false;
+      addOn.classList.remove("active");
     }
-  })
+  });
 }
 
 
-// Got add-ons to local storage
-// console.log(localStorage.getItem('selectedAddOns'));
+
+addOns.forEach((addOn) => {
+  addOnsText += `${addOn.children[1].children[0].textContent},`;
+  localStorage.setItem("addOnsText", addOnsText);
+
+  addOnsPrice += `${addOn.children[2].textContent},`;
+  localStorage.setItem("addOnsPrice", addOnsPrice);
+});
