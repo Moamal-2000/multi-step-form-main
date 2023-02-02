@@ -21,7 +21,7 @@
       <nav>
         <ul>
           <li class="active">
-            <a href="index.html">
+            <a href="#">
               <button type="button">1</button>
               <div>
                 <span class="step">Step 1</span>
@@ -30,8 +30,8 @@
             </a>
           </li>
 
-          <li>
-            <a href="select-plan.html">
+          <li class="blocked">
+            <a href="#">
               <button type="button">2</button>
               <div>
                 <span class="step">Step 2</span>
@@ -41,7 +41,7 @@
           </li>
 
           <li>
-            <a href="add-ons.html">
+            <a href="#">
               <button type="button">3</button>
               <div>
                 <span class="step">Step 3</span>
@@ -51,7 +51,7 @@
           </li>
 
           <li>
-            <a href="summary.html">
+            <a href="#">
               <button type="button">4</button>
               <div>
                 <span class="step">Step 4</span>
@@ -69,24 +69,31 @@
 
       <form>
         <div class="input">
-          <label for="name-input">Name</label>
+          <div>
+            <label for="name-input">Name</label>
+          </div>
           <input id="name-input" type="text" placeholder="e.g. Stephen King" required>
         </div>
 
         <div class="input">
-          <label for="email-input">Email Address</label>
+          <div>
+            <label for="email-input">Email Address</label>
+          </div>
           <input id="email-input" type="email" placeholder="e.g. stephenking@lorem.com" required>
         </div>
 
         <div class="input">
-          <label for="phone-input">Phone Number</label>
+          <div>
+            <label for="phone-input">Phone Number</label>
+          </div>
           <input id="phone-input" type="tel" placeholder="e.g. +1 234 567 890" required>
+        </div>
+
+        <div class="steps-buttons-holder">
+          <input type="submit" class="next-step" value="Next Step">
         </div>
       </form>
 
-      <div class="steps-buttons-holder">
-        <button class="next-step">Next Step</button>
-      </div>
     </section>
   </main>
 

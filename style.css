@@ -63,7 +63,7 @@ p {
   justify-content: flex-end;
 }
 
-.steps-buttons-holder button.next-step {
+.steps-buttons-holder .next-step {
   background-color: #053675;
   color: #f0f0f0;
   padding: 12px 24px;
@@ -83,12 +83,12 @@ p {
   -o-transition: 0.3s;
 }
 
-.steps-buttons-holder button.next-step:hover {
+.steps-buttons-holder .next-step:hover {
   color: #053675;
   background-color: transparent;
 }
 
-.steps-buttons-holder button.back-step {
+.steps-buttons-holder .back-step {
   border: none;
   background-color: transparent;
   color: gray;
@@ -102,7 +102,7 @@ p {
   -o-transition: 0.3s;
 }
 
-.steps-buttons-holder button.back-step:hover {
+.steps-buttons-holder .back-step:hover {
   color: #000;
 }
 
@@ -146,6 +146,10 @@ p {
   cursor: pointer;
 }
 
+.container .sidebar nav ul li.blocked {
+  opacity: 0.5;
+}
+
 .container .sidebar nav ul li a button {
   border: solid 1px #fff;
   width: 30px;
@@ -167,7 +171,7 @@ p {
   -o-transition: 0.3s;
 }
 
-.container .sidebar nav ul li:hover a button {
+.container .sidebar nav ul li:not(.blocked):not(.active):hover a button {
   background-color: rgba(190, 225, 253, 0.178);
 }
 
@@ -223,10 +227,21 @@ p {
   gap: 8px;
 }
 
-.your-info-section form .input label {
+.your-info-section form .input div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.your-info-section form .input div label {
   color: #3267a3;
   font-size: 14px;
   font-weight: 500;
+}
+
+.your-info-section form .input div span {
+  color: #ff3131;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .your-info-section form .input input {
@@ -464,7 +479,7 @@ p {
 
 /* Step 4 [Start]*/
 .finish-section .content .layout-content p,
-  .finish-section .content .layout-total p {
+.finish-section .content .layout-total p {
   margin: 0;
 }
 

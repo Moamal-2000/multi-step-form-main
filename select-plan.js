@@ -133,4 +133,16 @@ if (selectedPlan !== null) {
 const nextButton = document.querySelector(".steps-buttons-holder .next-step");
 const backButton = document.querySelector(".steps-buttons-holder .back-step");
 backButton.addEventListener("click", () => location.href = "index.html")
-nextButton.addEventListener("click", () => location.href = "add-ons.html")
+nextButton.addEventListener("click", () => {
+  location.href = "add-ons.html"
+})
+
+
+
+const steps = document.querySelectorAll('.container .sidebar nav ul li')
+
+
+steps.forEach(step => step.classList.add('blocked'))
+
+steps[0].classList.remove('blocked')
+steps[1].classList.remove('blocked')
