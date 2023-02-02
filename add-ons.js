@@ -86,3 +86,19 @@ addOns.forEach((addOn) => {
   addOnsPrice += `${addOn.children[2].textContent},`;
   localStorage.setItem("addOnsPrice", addOnsPrice);
 });
+
+
+const steps = document.querySelectorAll(".container .sidebar nav ul li");
+
+steps[0].addEventListener("click", () => {
+  if (!steps[0].classList.contains("blocked")) location.href = "index.html";
+});
+steps[1].addEventListener("click", () => {
+  if (!steps[1].classList.contains("blocked")) location.href = "select-plan.html";
+});
+steps[2].addEventListener("click", () => {
+  if (!steps[2].classList.contains("blocked")) location.href = "add-ons.html";
+});
+steps[3].addEventListener("click", () => {
+  if (!steps[3].classList.contains("blocked")) location.href = "summary.html";
+});

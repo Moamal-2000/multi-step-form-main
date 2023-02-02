@@ -12,8 +12,6 @@ const pricesContainersEle = document.querySelectorAll(
   ".select-plan-section .plans .plan div"
 );
 
-
-
 function switchPrices() {
   if (switcherSpan.style.transform === "translateX(4px)") {
     setYearlyContent();
@@ -21,8 +19,6 @@ function switchPrices() {
     setMonthlyContent();
   }
 }
-
-
 
 function setMonthlyContent() {
   switcherSpan.style.transform = "translateX(4px)";
@@ -33,15 +29,11 @@ function setMonthlyContent() {
   pricesElements[1].textContent = "$12/mo";
   pricesElements[2].textContent = "$15/mo";
 
-  loopOnParentElements: for (let i = 0; i < pricesContainersEle.length; i++) {
-    loopOnChildrenElements: for (
-      let j = 0;
-      j < pricesContainersEle[i].children.length;
-      j++
-    ) {
-      // get last element
+  for (let i = 0; i < pricesContainersEle.length; i++) {
+    for (let j = 0; j < pricesContainersEle[i].children.length; j++) {
       if (j === pricesContainersEle[i].children.length - 1) {
         if (pricesContainersEle[i].children[j].textContent.indexOf("yr") !== -1)
+          // remove last element
           pricesContainersEle[i].children[j].remove();
       }
 
@@ -52,8 +44,6 @@ function setMonthlyContent() {
 
   localStorage.setItem("monthlySub", monthlyLabel.classList.contains("active"));
 }
-
-
 
 function setYearlyContent() {
   switcherSpan.style.transform = "translateX(23px)";
@@ -74,18 +64,16 @@ function setYearlyContent() {
   localStorage.setItem("monthlySub", monthlyLabel.classList.contains("active"));
 }
 
-
-
 let monthlySub = localStorage.getItem("monthlySub");
-monthlySub === "true" ? setMonthlyContent() : setYearlyContent();
-
-
+monthlySub === "true"
+  ? setMonthlyContent()
+  : monthlySub === "false"
+  ? setYearlyContent()
+  : "";
 
 switcher.addEventListener("click", switchPrices);
 monthlyLabel.addEventListener("click", switchPrices);
 yearlyLabel.addEventListener("click", switchPrices);
-
-
 
 plans.forEach((plan, i) => {
   plan.addEventListener("click", () => {
@@ -94,22 +82,14 @@ plans.forEach((plan, i) => {
     });
 
     localStorage.setItem("selectedPlan", i);
-    localStorage.setItem(
-      "typeSub",
-      plan.children[1].children[0].textContent
-    );
-    localStorage.setItem(
-      "priceSub",
-      plan.children[1].children[1].textContent
-    );
+    localStorage.setItem("typeSub", plan.children[1].children[0].textContent);
+    localStorage.setItem("priceSub", plan.children[1].children[1].textContent);
 
-    console.log(plan.children[1].children[0].textContent);
-    console.log(plan.children[1].children[1].textContent);
     plan.classList.add("active");
+    steps[2].classList.remove("blocked");
+    localStorage.setItem("step2", true);
   });
 });
-
-
 
 let selectedPlan = localStorage.getItem("selectedPlan");
 if (selectedPlan !== null) {
@@ -128,21 +108,35 @@ if (selectedPlan !== null) {
   );
 } else localStorage.setItem("selectedPlan", 0);
 
-
-
 const nextButton = document.querySelector(".steps-buttons-holder .next-step");
 const backButton = document.querySelector(".steps-buttons-holder .back-step");
-backButton.addEventListener("click", () => location.href = "index.html")
+backButton.addEventListener("click", () => (location.href = "index.html"));
 nextButton.addEventListener("click", () => {
-  location.href = "add-ons.html"
-})
+  location.href = "add-ons.html";
+});
 
+const steps = document.querySelectorAll(".container .sidebar nav ul li");
+steps.forEach((step) => step.classList.add("blocked"));
 
+steps[0].classList.remove("blocked");
+steps[1].classList.remove("blocked");
 
-const steps = document.querySelectorAll('.container .sidebar nav ul li')
+// If step 2 passed unlock step3 and step4
+if (localStorage.getItem("step2") === "true") {
+  steps[2].classList.remove("blocked");
+  steps[3].classList.remove("blocked");
+}
 
-
-steps.forEach(step => step.classList.add('blocked'))
-
-steps[0].classList.remove('blocked')
-steps[1].classList.remove('blocked')
+steps[0].addEventListener("click", () => {
+  if (!steps[0].classList.contains("blocked")) location.href = "index.html";
+});
+steps[1].addEventListener("click", () => {
+  if (!steps[1].classList.contains("blocked"))
+    location.href = "select-plan.html";
+});
+steps[2].addEventListener("click", () => {
+  if (!steps[2].classList.contains("blocked")) location.href = "add-ons.html";
+});
+steps[3].addEventListener("click", () => {
+  if (!steps[3].classList.contains("blocked")) location.href = "summary.html";
+});

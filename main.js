@@ -194,9 +194,29 @@ if (localStorage.getItem("step1") === "true") {
   steps[1].classList.remove("blocked");
 }
 
+// If step 2 passed unlock step3 and step4
+if (localStorage.getItem("step2") === "true") {
+  steps[2].classList.remove("blocked");
+  steps[3].classList.remove("blocked");
+}
+
 // Check if all inputs are validated if not don't unlock next step
 steps.forEach((step) => {
   step.addEventListener("click", () => {
     if (!step.classList.contains("blocked")) handleSubmit();
   });
+});
+
+steps[0].addEventListener("click", () => {
+  if (!steps[0].classList.contains("blocked")) location.href = "index.html";
+});
+steps[1].addEventListener("click", () => {
+  if (!steps[1].classList.contains("blocked"))
+    location.href = "select-plan.html";
+});
+steps[2].addEventListener("click", () => {
+  if (!steps[2].classList.contains("blocked")) location.href = "add-ons.html";
+});
+steps[3].addEventListener("click", () => {
+  if (!steps[3].classList.contains("blocked")) location.href = "summary.html";
 });

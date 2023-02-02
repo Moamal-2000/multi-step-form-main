@@ -21,7 +21,7 @@
       <nav>
         <ul>
           <li>
-            <a href="index.html">
+            <a href="#">
               <button type="button">1</button>
               <div>
                 <span class="step">Step 1</span>
@@ -31,7 +31,7 @@
           </li>
 
           <li>
-            <a href="select-plan.html">
+            <a href="#">
               <button type="button">2</button>
               <div>
                 <span class="step">Step 2</span>
@@ -41,7 +41,7 @@
           </li>
 
           <li>
-            <a href="add-ons.html">
+            <a href="#">
               <button type="button">3</button>
               <div>
                 <span class="step">Step 3</span>
@@ -51,7 +51,7 @@
           </li>
 
           <li class="active">
-            <a href="summary.html">
+            <a href="#">
               <button type="button">4</button>
               <div>
                 <span class="step">Step 4</span>
@@ -71,7 +71,20 @@
           <div class="line">
             <div>
               <h3 class="type-sub">Arcade (Monthly)</h3>
-              <button type="button">change</button>
+              <button type="button">
+                change
+                <select>
+                  <optgroup label="Monthly">
+                  <option value="$9/mo">Arcade $9/mo</option>
+                  <option value="$12/mo">Advanced $9/mo</option>
+                  <option value="$15/mo">Pro $9/mo</option>
+
+                  <optgroup label="Yearly">
+                    <option value="$90/yr">Arcade $90/yr</option>
+                    <option value="$120/yr">Advanced $120/yr</option>
+                    <option value="$150/yr">Pro $150/yr</option>
+                </select>
+              </button>
             </div>
             <span class="price-sub">$9/mo</span>
           </div>
