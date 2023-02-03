@@ -48,17 +48,6 @@ if (monthlySub === "false") {
 }
 
 
-
-const nextButton = document.querySelector(".steps-buttons-holder .next-step");
-const backButton = document.querySelector(".steps-buttons-holder .back-step");
-backButton.addEventListener(
-  "click",
-  () => (location.href = "select-plan.html")
-);
-nextButton.addEventListener("click", () => (location.href = "summary.html"));
-
-
-
 let selectedAddOns = localStorage.getItem("selectedAddOns");
 if (selectedAddOns !== null) {
   let selectedAddOnsArr = selectedAddOns.split(" ");
@@ -102,3 +91,23 @@ steps[2].addEventListener("click", () => {
 steps[3].addEventListener("click", () => {
   if (!steps[3].classList.contains("blocked")) location.href = "summary.html";
 });
+
+
+
+const nextButton = document.querySelector(".steps-buttons-holder .next-step"),
+  backButton = document.querySelector(".steps-buttons-holder .back-step"),
+  nextButtonMobile = document.querySelector("footer .steps-buttons-holder .next-step"),
+  backButtonMobile = document.querySelector("footer .steps-buttons-holder .back-step");
+
+nextButton.addEventListener("click", () => (location.href = "summary.html"));
+
+nextButtonMobile.addEventListener("click", () => {
+  location.href = "summary.html";
+});
+
+backButton.addEventListener(
+  "click",
+  () => (location.href = "select-plan.html")
+);
+
+backButtonMobile.addEventListener("click", () => (location.href = "select-plan.html"));

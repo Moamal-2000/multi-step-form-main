@@ -1,6 +1,7 @@
 "use strict";
 
 const nextButton = document.querySelector(".steps-buttons-holder .next-step"),
+  nextButtonMobile = document.querySelector("footer .steps-buttons-holder .next-step"),
   nameInput = document.getElementById("name-input"),
   emailInput = document.getElementById("email-input"),
   phoneInput = document.getElementById("phone-input");
@@ -23,8 +24,10 @@ nameInput.addEventListener("input", (e) => userNameValidation(e));
 nameInput.addEventListener("blur", () => {
   const messageContainer = nameInput.parentElement.children[0];
 
-  if (localStorage.getItem("validUserName") === "false")
+  if (localStorage.getItem("validUserName") === "false") {
     messageContainer.appendChild(userNameMessageSpan);
+    nameInput.style.border = 'solid 2px #ff5454'
+  }
   handleSubmit(false);
 });
 
@@ -36,6 +39,7 @@ nameInput.addEventListener("focus", (e) => {
   const arrOfElements = Array.from(e.target.parentElement.children[0].children);
   arrOfElements.forEach((element) => {
     if (element.id === "user-message") element.remove();
+    nameInput.style.border = ''
   });
   handleSubmit(false);
 });
@@ -61,8 +65,10 @@ emailInput.addEventListener("input", (e) => emailValidation(e));
 
 emailInput.addEventListener("blur", () => {
   const messageContainer = emailInput.parentElement.children[0];
-  if (localStorage.getItem("validEmail") === "false")
+  if (localStorage.getItem("validEmail") === "false") {
     messageContainer.appendChild(emailMessageSpan);
+    emailInput.style.border = 'solid 2px #ff5454'
+  }
   handleSubmit(false);
 });
 
@@ -77,6 +83,7 @@ emailInput.addEventListener("focus", (e) => {
   const arrOfElements = Array.from(e.target.parentElement.children[0].children);
   arrOfElements.forEach((element) => {
     if (element.id === "email-message") element.remove();
+    emailInput.style.border = ''
   });
   handleSubmit(false);
 });
@@ -98,8 +105,10 @@ phoneInput.addEventListener("input", (e) => phoneNumberValidation(e));
 
 phoneInput.addEventListener("blur", () => {
   const messageContainer = phoneInput.parentElement.children[0];
-  if (localStorage.getItem("validPhoneNumber") === "false")
+  if (localStorage.getItem("validPhoneNumber") === "false") {
     messageContainer.appendChild(phoneMessageSpan);
+    phoneInput.style.border = 'solid 2px #ff5454'
+  }
   handleSubmit(false);
 });
 
@@ -112,6 +121,7 @@ phoneInput.addEventListener("focus", (e) => {
   const arrOfElements = Array.from(e.target.parentElement.children[0].children);
   arrOfElements.forEach((element) => {
     if (element.id === "phone-message") element.remove();
+    phoneInput.style.border = ''
   });
   handleSubmit(false);
 });
@@ -166,6 +176,10 @@ function handleSubmit(isValid = true) {
 }
 
 nextButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleSubmit();
+});
+nextButtonMobile.addEventListener("click", (e) => {
   e.preventDefault();
   handleSubmit();
 });

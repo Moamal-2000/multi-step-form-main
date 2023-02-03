@@ -42,6 +42,14 @@ function setMonthlyContent() {
     }
   }
 
+  plans.forEach((plan, i) => {
+    if (plan.classList.contains("active")) {
+
+      localStorage.setItem("selectedPlan", i);
+      localStorage.setItem("typeSub", plan.children[1].children[0].textContent);
+      localStorage.setItem("priceSub", plan.children[1].children[1].textContent);
+    }
+  });
   localStorage.setItem("monthlySub", monthlyLabel.classList.contains("active"));
 }
 
@@ -61,6 +69,15 @@ function setYearlyContent() {
     pricesContainersEle[i].appendChild(span);
   }
 
+  plans.forEach((plan, i) => {
+    if (plan.classList.contains("active")) {
+
+      localStorage.setItem("selectedPlan", i);
+      localStorage.setItem("typeSub", plan.children[1].children[0].textContent);
+      localStorage.setItem("priceSub", plan.children[1].children[1].textContent);
+    }
+
+  });
   localStorage.setItem("monthlySub", monthlyLabel.classList.contains("active"));
 }
 
@@ -109,11 +126,21 @@ if (selectedPlan !== null) {
 } else localStorage.setItem("selectedPlan", 0);
 
 const nextButton = document.querySelector(".steps-buttons-holder .next-step");
+const nextButtonMobile = document.querySelector("footer .steps-buttons-holder .next-step");
 const backButton = document.querySelector(".steps-buttons-holder .back-step");
-backButton.addEventListener("click", () => (location.href = "index.html"));
+const backButtonMobile = document.querySelector("footer .steps-buttons-holder .back-step");
+
 nextButton.addEventListener("click", () => {
   location.href = "add-ons.html";
 });
+
+nextButtonMobile.addEventListener("click", () => {
+  location.href = "add-ons.html";
+});
+
+backButton.addEventListener("click", () => (location.href = "index.html"));
+
+backButtonMobile.addEventListener("click", () => (location.href = "index.html"));
 
 const steps = document.querySelectorAll(".container .sidebar nav ul li");
 steps.forEach((step) => step.classList.add("blocked"));
