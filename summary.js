@@ -11,11 +11,14 @@ if (localStorage.getItem("priceSub").slice(-2) === "mo") {
 }
 
 
+
 const priceSub = document.querySelector(".finish-section .price-sub");
 const showAddOnsEle = document.querySelector(
   ".finish-section .content .layout-content"
 );
 priceSub.textContent = localStorage.getItem("priceSub");
+
+
 
 
 let addOnsLocal = localStorage.getItem("selectedAddOns");
@@ -51,6 +54,7 @@ if (addOnsLocal !== null) {
 }
 
 
+
 const totalPrice = document.querySelector(".finish-section .total-price");
 // Get total price and show it in the site
 function getTotalPrice() {
@@ -60,6 +64,7 @@ function getTotalPrice() {
   else totalPrice.textContent = `+$${total}/yr`;
 }
 getTotalPrice();
+
 
 
 const steps = document.querySelectorAll(".container .sidebar nav ul li");
@@ -78,10 +83,11 @@ steps[3].addEventListener("click", () => {
 });
 
 
-const confirmButton = document.querySelector('.steps-buttons-holder .confirm-button')
-const confirmButtonMobile = document.querySelector('footer .steps-buttons-holder .confirm-button')
-const backButton = document.querySelector(".steps-buttons-holder .back-step");
-const backButtonMobile = document.querySelector("footer .steps-buttons-holder .back-step");
+
+const confirmButton = document.querySelector('.steps-buttons-holder .confirm-button'),
+  confirmButtonMobile = document.querySelector('footer .steps-buttons-holder .confirm-button'),
+  backButton = document.querySelector(".steps-buttons-holder .back-step"),
+  backButtonMobile = document.querySelector("footer .steps-buttons-holder .back-step");
 
 confirmButton.addEventListener('click', () => {
   location.href = 'subscribed.html'

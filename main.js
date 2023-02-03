@@ -6,6 +6,8 @@ const nextButton = document.querySelector(".steps-buttons-holder .next-step"),
   emailInput = document.getElementById("email-input"),
   phoneInput = document.getElementById("phone-input");
 
+
+
 //! Input user name logic
 function userNameValidation(e) {
   let val = e.target.value.trim();
@@ -13,14 +15,17 @@ function userNameValidation(e) {
   handleSubmit(false);
 }
 
+
+
 const userNameMessageSpan = document.createElement("span");
 userNameMessageSpan.id = "user-message";
 userNameMessageSpan.appendChild(
   document.createTextNode("user name is not valid")
 );
 
-nameInput.addEventListener("input", (e) => userNameValidation(e));
 
+
+nameInput.addEventListener("input", (e) => userNameValidation(e));
 nameInput.addEventListener("blur", () => {
   const messageContainer = nameInput.parentElement.children[0];
 
@@ -30,6 +35,8 @@ nameInput.addEventListener("blur", () => {
   }
   handleSubmit(false);
 });
+
+
 
 nameInput.addEventListener("focus", (e) => {
   localStorage.setItem(
@@ -44,6 +51,8 @@ nameInput.addEventListener("focus", (e) => {
   handleSubmit(false);
 });
 
+
+
 //! Input email logic
 function emailValidation(e) {
   // I used Regex code from internet for validation email
@@ -57,12 +66,15 @@ function emailValidation(e) {
   handleSubmit(false);
 }
 
+
+
 const emailMessageSpan = document.createElement("span");
 emailMessageSpan.id = "email-message";
 emailMessageSpan.appendChild(document.createTextNode("email is not valid"));
 
-emailInput.addEventListener("input", (e) => emailValidation(e));
 
+
+emailInput.addEventListener("input", (e) => emailValidation(e));
 emailInput.addEventListener("blur", () => {
   const messageContainer = emailInput.parentElement.children[0];
   if (localStorage.getItem("validEmail") === "false") {
@@ -71,6 +83,8 @@ emailInput.addEventListener("blur", () => {
   }
   handleSubmit(false);
 });
+
+
 
 emailInput.addEventListener("focus", (e) => {
   localStorage.setItem(
@@ -88,6 +102,8 @@ emailInput.addEventListener("focus", (e) => {
   handleSubmit(false);
 });
 
+
+
 //! Input phone number logic
 function phoneNumberValidation(e) {
   let val = e.target.value.trim();
@@ -95,14 +111,17 @@ function phoneNumberValidation(e) {
   handleSubmit(false);
 }
 
+
+
 const phoneMessageSpan = document.createElement("span");
 phoneMessageSpan.id = "phone-message";
 phoneMessageSpan.appendChild(
   document.createTextNode("phone number is not valid")
 );
 
-phoneInput.addEventListener("input", (e) => phoneNumberValidation(e));
 
+
+phoneInput.addEventListener("input", (e) => phoneNumberValidation(e));
 phoneInput.addEventListener("blur", () => {
   const messageContainer = phoneInput.parentElement.children[0];
   if (localStorage.getItem("validPhoneNumber") === "false") {
@@ -111,6 +130,8 @@ phoneInput.addEventListener("blur", () => {
   }
   handleSubmit(false);
 });
+
+
 
 phoneInput.addEventListener("focus", (e) => {
   localStorage.setItem(
@@ -125,6 +146,8 @@ phoneInput.addEventListener("focus", (e) => {
   });
   handleSubmit(false);
 });
+
+
 
 //! Submit button logic
 function updateValidationLocal() {
@@ -144,6 +167,8 @@ function updateValidationLocal() {
   );
 }
 
+
+
 // Set data from inputs to local storage
 function getSubmittedData() {
   localStorage.setItem("userName", nameInput.value.trim());
@@ -151,6 +176,8 @@ function getSubmittedData() {
   localStorage.setItem("phoneNumber", phoneInput.value.trim());
   localStorage.setItem("step1", true);
 }
+
+
 
 function handleSubmit(isValid = true) {
   updateValidationLocal();
@@ -175,14 +202,7 @@ function handleSubmit(isValid = true) {
   } else steps[1].classList.add("blocked");
 }
 
-nextButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  handleSubmit();
-});
-nextButtonMobile.addEventListener("click", (e) => {
-  e.preventDefault();
-  handleSubmit();
-});
+
 
 // Get data from local storage and put them in the inputs
 let userNameLocal = localStorage.getItem("userName");
@@ -193,6 +213,8 @@ if (emailLocal !== null) emailInput.value = emailLocal;
 
 let phoneNumberLocal = localStorage.getItem("phoneNumber");
 if (phoneNumberLocal !== null) phoneInput.value = phoneNumberLocal;
+
+
 
 // Steps logic
 const steps = document.querySelectorAll(".container .sidebar nav ul li");
@@ -214,6 +236,8 @@ if (localStorage.getItem("step2") === "true") {
   steps[3].classList.remove("blocked");
 }
 
+
+
 // Check if all inputs are validated if not don't unlock next step
 steps.forEach((step) => {
   step.addEventListener("click", () => {
@@ -233,4 +257,15 @@ steps[2].addEventListener("click", () => {
 });
 steps[3].addEventListener("click", () => {
   if (!steps[3].classList.contains("blocked")) location.href = "summary.html";
+});
+
+
+
+nextButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleSubmit();
+});
+nextButtonMobile.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleSubmit();
 });

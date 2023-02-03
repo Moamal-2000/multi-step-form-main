@@ -1,16 +1,14 @@
 "use strict";
 
-const switcher = document.getElementById("monthly-yearly");
-const switcherSpan = document.querySelector(".select-sub #monthly-yearly span");
-const monthlyLabel = document.querySelector(".select-sub .monthly");
-const yearlyLabel = document.querySelector(".select-sub .yearly");
-const plans = document.querySelectorAll(".select-plan-section .plans .plan");
-const pricesElements = [
-  ...document.querySelectorAll(".select-plan-section .plans .plan .price"),
-];
-const pricesContainersEle = document.querySelectorAll(
-  ".select-plan-section .plans .plan div"
-);
+const switcher = document.getElementById("monthly-yearly"),
+  switcherSpan = document.querySelector(".select-sub #monthly-yearly span"),
+  monthlyLabel = document.querySelector(".select-sub .monthly"),
+  yearlyLabel = document.querySelector(".select-sub .yearly"),
+  plans = document.querySelectorAll(".select-plan-section .plans .plan"),
+  pricesElements = [...document.querySelectorAll(".select-plan-section .plans .plan .price")],
+  pricesContainersEle = document.querySelectorAll(".select-plan-section .plans .plan div");
+
+
 
 function switchPrices() {
   if (switcherSpan.style.transform === "translateX(4px)") {
@@ -19,6 +17,8 @@ function switchPrices() {
     setMonthlyContent();
   }
 }
+
+
 
 function setMonthlyContent() {
   switcherSpan.style.transform = "translateX(4px)";
@@ -53,6 +53,8 @@ function setMonthlyContent() {
   localStorage.setItem("monthlySub", monthlyLabel.classList.contains("active"));
 }
 
+
+
 function setYearlyContent() {
   switcherSpan.style.transform = "translateX(23px)";
   yearlyLabel.classList.add("active");
@@ -81,6 +83,8 @@ function setYearlyContent() {
   localStorage.setItem("monthlySub", monthlyLabel.classList.contains("active"));
 }
 
+
+
 let monthlySub = localStorage.getItem("monthlySub");
 monthlySub === "true"
   ? setMonthlyContent()
@@ -108,6 +112,8 @@ plans.forEach((plan, i) => {
   });
 });
 
+
+
 let selectedPlan = localStorage.getItem("selectedPlan");
 if (selectedPlan !== null) {
   plans.forEach((plan) => {
@@ -125,22 +131,7 @@ if (selectedPlan !== null) {
   );
 } else localStorage.setItem("selectedPlan", 0);
 
-const nextButton = document.querySelector(".steps-buttons-holder .next-step");
-const nextButtonMobile = document.querySelector("footer .steps-buttons-holder .next-step");
-const backButton = document.querySelector(".steps-buttons-holder .back-step");
-const backButtonMobile = document.querySelector("footer .steps-buttons-holder .back-step");
 
-nextButton.addEventListener("click", () => {
-  location.href = "add-ons.html";
-});
-
-nextButtonMobile.addEventListener("click", () => {
-  location.href = "add-ons.html";
-});
-
-backButton.addEventListener("click", () => (location.href = "index.html"));
-
-backButtonMobile.addEventListener("click", () => (location.href = "index.html"));
 
 const steps = document.querySelectorAll(".container .sidebar nav ul li");
 steps.forEach((step) => step.classList.add("blocked"));
@@ -153,6 +144,8 @@ if (localStorage.getItem("step2") === "true") {
   steps[2].classList.remove("blocked");
   steps[3].classList.remove("blocked");
 }
+
+
 
 steps[0].addEventListener("click", () => {
   if (!steps[0].classList.contains("blocked")) location.href = "index.html";
@@ -167,3 +160,24 @@ steps[2].addEventListener("click", () => {
 steps[3].addEventListener("click", () => {
   if (!steps[3].classList.contains("blocked")) location.href = "summary.html";
 });
+
+
+
+const nextButton = document.querySelector(".steps-buttons-holder .next-step"),
+  nextButtonMobile = document.querySelector("footer .steps-buttons-holder .next-step"),
+  backButton = document.querySelector(".steps-buttons-holder .back-step"),
+  backButtonMobile = document.querySelector("footer .steps-buttons-holder .back-step");
+
+
+
+nextButton.addEventListener("click", () => {
+  location.href = "add-ons.html";
+});
+
+nextButtonMobile.addEventListener("click", () => {
+  location.href = "add-ons.html";
+});
+
+backButton.addEventListener("click", () => (location.href = "index.html"));
+
+backButtonMobile.addEventListener("click", () => (location.href = "index.html"));
