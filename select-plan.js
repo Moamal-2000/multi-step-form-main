@@ -10,6 +10,7 @@ const switcher = document.getElementById("monthly-yearly"),
 
 
 
+
 function switchPrices() {
   switcherSpan.style.transform === "translateX(4px)"
     ? setYearlyContent()
@@ -181,7 +182,6 @@ nextButtonMobile.addEventListener("click", () => {
 });
 
 backButton.addEventListener("click", () => (location.href = "index.html"));
-
 backButtonMobile.addEventListener("click", () => (location.href = "index.html"));
 
 

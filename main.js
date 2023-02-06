@@ -7,15 +7,24 @@ const nextButton = document.querySelector(".steps-buttons-holder .next-step"),
   nameInput = document.getElementById("name-input"),
   emailInput = document.getElementById("email-input"),
   phoneInput = document.getElementById("phone-input"),
-  buttonsContainer = document.querySelector("footer .steps-buttons-holder");
-
-
+  buttonsContainer = document.querySelector("footer .steps-buttons-holder"),
+  messageContainer = nameInput.parentElement.children[0],
+  userNameMessageSpan = document.createElement("span"),
+  emailMessageSpan = document.createElement("span"),
+  phoneMessageSpan = document.createElement("span");
 
 
 
 let specialChars = "~`!@#$%^&*()_-=+/?.>,<'\":;}]{[|\\~";
 let isInputPhoneContainsPlus = false;
 let isValidatedPhoneNumber = false;
+let isInputPhoneFocused = false;
+
+
+if (localStorage.getItem('validPhoneNumber') === 'true')
+  isValidatedPhoneNumber = localStorage.getItem('validPhoneNumber')
+
+
 
 
 
@@ -66,12 +75,8 @@ function userNameValidation(e) {
 
 
 
-const messageContainer = nameInput.parentElement.children[0];
-const userNameMessageSpan = document.createElement("span");
+
 userNameMessageSpan.id = "user-message";
-
-
-
 
 messageContainer.appendChild(userNameMessageSpan);
 nameInput.addEventListener("input", (e) => userNameValidation(e));
@@ -130,11 +135,7 @@ function emailValidation(e) {
 
 
 
-const emailMessageSpan = document.createElement("span");
 emailMessageSpan.id = "email-message";
-
-
-
 
 emailInput.addEventListener("input", (e) => emailValidation(e));
 emailInput.addEventListener("blur", (e) => {
@@ -183,22 +184,14 @@ emailInput.addEventListener("focus", (e) => {
 //! Input phone number logic
 function phoneNumberValidation(e) {
   const messageContainer = phoneInput.parentElement.children[0];
-  let val = e.target.value.trim();
   let numbersCounted = 0;
-  let lastChar = val[val.length - 1];
+  let lastChar = e.target.value.trim()[e.target.value.trim().length - 1];
+
 
   // Add sign + if phone number doesn't have it
-  if (val[0] !== "+" && !isInputPhoneContainsPlus) {
+  if (e.target.value.trim()[0] !== "+" && !isInputPhoneContainsPlus) {
     e.target.value = `+${e.target.value}`;
     isInputPhoneContainsPlus = true;
-  }
-
-  // Get length numbers
-  for (let i in e.target.value) {
-    let number = e.target.value[i];
-    if (number === "+") continue;
-    if (number === " ") continue;
-    numbersCounted++;
   }
 
   if (isNaN(parseFloat(lastChar))) {
@@ -210,8 +203,7 @@ function phoneNumberValidation(e) {
     messageContainer.appendChild(phoneMessageSpan);
 
     phoneInput.style.border = "solid 2px #ff5454";
-    // Delete Wrote char
-    e.target.value = val.slice(0, -1);
+    e.target.value = e.target.value.trim().slice(0, -1)
     isInputPhoneContainsPlus = false;
   } else {
     // if char was not number reset border and message to default
@@ -220,6 +212,7 @@ function phoneNumberValidation(e) {
   }
 
   for (let i in specialChars) {
+    if (specialChars[i] === '+') continue;
     if (specialChars[i] === lastChar) {
       // Show error message if char equal to one of the special characters
       phoneMessageSpan.textContent = "";
@@ -232,16 +225,22 @@ function phoneNumberValidation(e) {
 
       phoneInput.style.border = "solid 2px #ff5454";
 
-      // Delete wrote char if its special character
-      e.target.value = val.slice(0, -1);
       isInputPhoneContainsPlus = false;
     }
   }
 
+    // Get length numbers
+    for (let i in e.target.value) {
+      let number = e.target.value[i];
+      if (number === "+") continue;
+      if (number === " ") continue;
+      numbersCounted++;
+    }
+
   // Check if phone number is valid
-  /\+\d/.test(val) && numbersCounted > 10 && numbersCounted < 14
-    ? (isValidatedPhoneNumber = true)
-    : (isValidatedPhoneNumber = false);
+  /\+\d/.test(e.target.value) && numbersCounted > 10 && numbersCounted < 14
+    ? isValidatedPhoneNumber = true
+    : isValidatedPhoneNumber = false;
 
   localStorage.setItem("validPhoneNumber", isValidatedPhoneNumber);
   handleSubmit(false);
@@ -250,27 +249,14 @@ function phoneNumberValidation(e) {
 
 
 
-phoneInput.addEventListener("keydown", (e) => {
-  if (e.key === "Backspace") {
-    if (e.target.value[0] === "+") isInputPhoneContainsPlus = false;
-  }
-});
-
-
-
-
-const phoneMessageSpan = document.createElement("span");
 phoneMessageSpan.id = "phone-message";
-
-
-
-
 
 phoneInput.addEventListener("input", (e) => phoneNumberValidation(e));
 phoneInput.addEventListener("blur", (e) => {
   const messageContainer = phoneInput.parentElement.children[0];
   let msg = "";
-
+  
+  isInputPhoneFocused = false;
   // if input have only sign + empty the input
   if (e.target.value.length === 1) e.target.value = "";
 
@@ -291,6 +277,7 @@ phoneInput.addEventListener("blur", (e) => {
 
   // if phone number is not valid show error message
   if (localStorage.getItem("validPhoneNumber") === "false") {
+    phoneMessageSpan.textContent = ''
     messageContainer.appendChild(phoneMessageSpan);
     phoneMessageSpan.append(msg);
     phoneInput.style.border = "solid 2px #ff5454";
@@ -299,6 +286,7 @@ phoneInput.addEventListener("blur", (e) => {
 });
 
 phoneInput.addEventListener("focus", (e) => {
+  isInputPhoneFocused = true
   localStorage.setItem("validPhoneNumber", isValidatedPhoneNumber);
 
   const arrOfElements = Array.from(e.target.parentElement.children[0].children);
@@ -310,6 +298,23 @@ phoneInput.addEventListener("focus", (e) => {
     phoneInput.style.border = "";
   });
   handleSubmit(false);
+});
+
+
+
+
+phoneInput.addEventListener("keypress", (e) => {
+  if (isInputPhoneFocused) {
+    // if (e.target.value === '+') 
+    //   e.target.value = e.target.value.slice(0, -1)
+
+    if (e.key === "Backspace") {
+      if (e.target.value === e.target.value[0]) e.preventDefault()
+      if (e.target.value[0] === "+") {
+        isInputPhoneContainsPlus = false;
+      }
+    }
+  }
 });
 
 
@@ -374,6 +379,7 @@ function handleSubmitInvalidated(e) {
   validations = [validUserName, validEmail, validPhoneNumber],
   validated = 0;
 
+
 validations.forEach((validation) => {
   if (validation === "true") validated++;
 });
@@ -428,7 +434,7 @@ steps.forEach((step) => {
 
 
 
-
+// if steps doesn't have class blocked set url path on click
 steps[0].addEventListener("click", () => {
   if (!steps[0].classList.contains("blocked")) location.href = "index.html";
 });
