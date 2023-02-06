@@ -21,10 +21,13 @@ let isValidatedPhoneNumber = false;
 let isInputPhoneFocused = false;
 
 
+let test = document.querySelector('.test')
+
+console.log(test);
+
+
 if (localStorage.getItem('validPhoneNumber') === 'true')
   isValidatedPhoneNumber = localStorage.getItem('validPhoneNumber')
-
-
 
 
 
