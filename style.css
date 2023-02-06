@@ -149,6 +149,11 @@ p {
   color: #000;
 }
 
+.steps-buttons-holder .next-step:hover.error {
+  border-color: #ff3131;
+  color: #ff3131;
+}
+
 /* Global styles [End] */
 
 

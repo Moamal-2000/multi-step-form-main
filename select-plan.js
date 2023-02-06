@@ -11,11 +11,9 @@ const switcher = document.getElementById("monthly-yearly"),
 
 
 function switchPrices() {
-  if (switcherSpan.style.transform === "translateX(4px)") {
-    setYearlyContent();
-  } else {
-    setMonthlyContent();
-  }
+  switcherSpan.style.transform === "translateX(4px)"
+    ? setYearlyContent()
+    : setMonthlyContent();
 }
 
 
@@ -114,6 +112,10 @@ plans.forEach((plan, i) => {
 
 
 
+if (localStorage.getItem("selectedPlan") === null) localStorage.setItem("selectedPlan", 0);
+
+
+
 let selectedPlan = localStorage.getItem("selectedPlan");
 if (selectedPlan !== null) {
   plans.forEach((plan) => {
@@ -129,7 +131,7 @@ if (selectedPlan !== null) {
     "priceSub",
     plans[selectedPlan].children[1].children[1].textContent
   );
-} else localStorage.setItem("selectedPlan", 0);
+}
 
 
 
@@ -181,3 +183,9 @@ nextButtonMobile.addEventListener("click", () => {
 backButton.addEventListener("click", () => (location.href = "index.html"));
 
 backButtonMobile.addEventListener("click", () => (location.href = "index.html"));
+
+
+
+
+
+//! Phone number must delete error message before another one appears

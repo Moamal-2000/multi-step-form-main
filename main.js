@@ -1,55 +1,116 @@
 "use strict";
 
 const nextButton = document.querySelector(".steps-buttons-holder .next-step"),
-  nextButtonMobile = document.querySelector("footer .steps-buttons-holder .next-step"),
+  nextButtonMobile = document.querySelector(
+    "footer .steps-buttons-holder .next-step"
+  ),
   nameInput = document.getElementById("name-input"),
   emailInput = document.getElementById("email-input"),
-  phoneInput = document.getElementById("phone-input");
+  phoneInput = document.getElementById("phone-input"),
+  buttonsContainer = document.querySelector("footer .steps-buttons-holder");
+
+
+
+
+
+let specialChars = "~`!@#$%^&*()_-=+/?.>,<'\":;}]{[|\\~";
+let isInputPhoneContainsPlus = false;
+let isValidatedPhoneNumber = false;
+
 
 
 
 //! Input user name logic
 function userNameValidation(e) {
   let val = e.target.value.trim();
+  let lastChar = val[val.length - 1];
+
+  if (isNaN(parseFloat(lastChar))) {
+    // if char was not number reset border and message to default
+    nameInput.style.border = "";
+    userNameMessageSpan.textContent = "";
+  } else {
+    // Show error message if char was number
+    userNameMessageSpan.textContent = "";
+    userNameMessageSpan.appendChild(
+      document.createTextNode("Username must not contains numbers")
+    );
+    messageContainer.appendChild(userNameMessageSpan);
+
+    nameInput.style.border = "solid 2px #ff5454";
+    // Delete wrote char if its number
+    e.target.value = e.target.value.slice(0, -1);
+  }
+
+
+  for (let i in specialChars) {
+    if (specialChars[i] === lastChar) {
+      // Show error message if char equal to one of the special characters
+      userNameMessageSpan.textContent = "";
+      userNameMessageSpan.appendChild(
+        document.createTextNode(`Username must not contains (${specialChars})`)
+      );
+      messageContainer.appendChild(userNameMessageSpan);
+
+      nameInput.style.border = "solid 2px #ff5454";
+
+      // Delete wrote char if its special character
+      e.target.value = e.target.value.slice(0, -1);
+    }
+  }
+
   localStorage.setItem("validUserName", /[a-z] [a-z]/gi.test(val));
   handleSubmit(false);
 }
 
 
 
+
+const messageContainer = nameInput.parentElement.children[0];
 const userNameMessageSpan = document.createElement("span");
 userNameMessageSpan.id = "user-message";
-userNameMessageSpan.appendChild(
-  document.createTextNode("user name is not valid")
-);
 
 
 
+
+messageContainer.appendChild(userNameMessageSpan);
 nameInput.addEventListener("input", (e) => userNameValidation(e));
-nameInput.addEventListener("blur", () => {
-  const messageContainer = nameInput.parentElement.children[0];
+nameInput.addEventListener("blur", (e) => {
+  // Reset text message
+  userNameMessageSpan.textContent = "";
+  // Reset input's border
+  nameInput.style.border = "";
 
   if (localStorage.getItem("validUserName") === "false") {
+    userNameMessageSpan.appendChild(
+      e.target.value.length === 0
+        ? document.createTextNode("This field must not be empty")
+        : document.createTextNode("Username require first name & last name")
+    );
     messageContainer.appendChild(userNameMessageSpan);
-    nameInput.style.border = 'solid 2px #ff5454'
+    nameInput.style.border = "solid 2px #ff5454";
   }
   handleSubmit(false);
 });
 
 
 
+
 nameInput.addEventListener("focus", (e) => {
-  localStorage.setItem(
-    "validUserName",
-    /[a-z] [a-z]/gi.test(nameInput.value.trim())
-  );
+  localStorage.setItem("validUserName", /[a-z] [a-z]/gi.test(nameInput.value.trim()));
+
   const arrOfElements = Array.from(e.target.parentElement.children[0].children);
   arrOfElements.forEach((element) => {
-    if (element.id === "user-message") element.remove();
-    nameInput.style.border = ''
+    // Delete message element
+    if (element.id === "user-message") {
+      element.textContent = "";
+      element.remove();
+    }
+    nameInput.style.border = "";
   });
   handleSubmit(false);
 });
+
 
 
 
@@ -68,21 +129,31 @@ function emailValidation(e) {
 
 
 
+
 const emailMessageSpan = document.createElement("span");
 emailMessageSpan.id = "email-message";
-emailMessageSpan.appendChild(document.createTextNode("email is not valid"));
+
 
 
 
 emailInput.addEventListener("input", (e) => emailValidation(e));
-emailInput.addEventListener("blur", () => {
+emailInput.addEventListener("blur", (e) => {
   const messageContainer = emailInput.parentElement.children[0];
+
+  emailMessageSpan.appendChild(
+    e.target.value.length === 0
+      ? document.createTextNode("This field must not be empty")
+      : document.createTextNode("Email is not valid")
+  );
+
   if (localStorage.getItem("validEmail") === "false") {
     messageContainer.appendChild(emailMessageSpan);
-    emailInput.style.border = 'solid 2px #ff5454'
+    emailInput.style.border = "solid 2px #ff5454";
   }
   handleSubmit(false);
 });
+
+
 
 
 
@@ -96,76 +167,166 @@ emailInput.addEventListener("focus", (e) => {
 
   const arrOfElements = Array.from(e.target.parentElement.children[0].children);
   arrOfElements.forEach((element) => {
-    if (element.id === "email-message") element.remove();
-    emailInput.style.border = ''
+    // Delete message elemnet
+    if (element.id === "email-message") {
+      element.textContent = "";
+      element.remove();
+    }
+    emailInput.style.border = "";
   });
   handleSubmit(false);
 });
+
 
 
 
 //! Input phone number logic
 function phoneNumberValidation(e) {
+  const messageContainer = phoneInput.parentElement.children[0];
   let val = e.target.value.trim();
-  localStorage.setItem("validPhoneNumber", /\+\d/.test(val));
+  let numbersCounted = 0;
+  let lastChar = val[val.length - 1];
+
+  // Add sign + if phone number doesn't have it
+  if (val[0] !== "+" && !isInputPhoneContainsPlus) {
+    e.target.value = `+${e.target.value}`;
+    isInputPhoneContainsPlus = true;
+  }
+
+  // Get length numbers
+  for (let i in e.target.value) {
+    let number = e.target.value[i];
+    if (number === "+") continue;
+    if (number === " ") continue;
+    numbersCounted++;
+  }
+
+  if (isNaN(parseFloat(lastChar))) {
+    // Show error message if char was letter
+    phoneMessageSpan.textContent = "";
+    phoneMessageSpan.appendChild(
+      document.createTextNode("Phone number must not contains Letters")
+    );
+    messageContainer.appendChild(phoneMessageSpan);
+
+    phoneInput.style.border = "solid 2px #ff5454";
+    // Delete Wrote char
+    e.target.value = val.slice(0, -1);
+    isInputPhoneContainsPlus = false;
+  } else {
+    // if char was not number reset border and message to default
+    phoneInput.style.border = "";
+    phoneMessageSpan.textContent = "";
+  }
+
+  for (let i in specialChars) {
+    if (specialChars[i] === lastChar) {
+      // Show error message if char equal to one of the special characters
+      phoneMessageSpan.textContent = "";
+      phoneMessageSpan.appendChild(
+        document.createTextNode(
+          `Phone number must not contains (${specialChars})`
+        )
+      );
+      messageContainer.appendChild(phoneMessageSpan);
+
+      phoneInput.style.border = "solid 2px #ff5454";
+
+      // Delete wrote char if its special character
+      e.target.value = val.slice(0, -1);
+      isInputPhoneContainsPlus = false;
+    }
+  }
+
+  // Check if phone number is valid
+  /\+\d/.test(val) && numbersCounted > 10 && numbersCounted < 14
+    ? (isValidatedPhoneNumber = true)
+    : (isValidatedPhoneNumber = false);
+
+  localStorage.setItem("validPhoneNumber", isValidatedPhoneNumber);
   handleSubmit(false);
 }
 
 
 
-const phoneMessageSpan = document.createElement("span");
-phoneMessageSpan.id = "phone-message";
-phoneMessageSpan.appendChild(
-  document.createTextNode("phone number is not valid")
-);
 
-
-
-phoneInput.addEventListener("input", (e) => phoneNumberValidation(e));
-phoneInput.addEventListener("blur", () => {
-  const messageContainer = phoneInput.parentElement.children[0];
-  if (localStorage.getItem("validPhoneNumber") === "false") {
-    messageContainer.appendChild(phoneMessageSpan);
-    phoneInput.style.border = 'solid 2px #ff5454'
+phoneInput.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace") {
+    if (e.target.value[0] === "+") isInputPhoneContainsPlus = false;
   }
-  handleSubmit(false);
 });
 
 
 
+
+const phoneMessageSpan = document.createElement("span");
+phoneMessageSpan.id = "phone-message";
+
+
+
+
+
+phoneInput.addEventListener("input", (e) => phoneNumberValidation(e));
+phoneInput.addEventListener("blur", (e) => {
+  const messageContainer = phoneInput.parentElement.children[0];
+  let msg = "";
+
+  // if input have only sign + empty the input
+  if (e.target.value.length === 1) e.target.value = "";
+
+  /* set error message depending on
+    1- if the input is empty
+    2- if the input is less than 14 number
+    3- if the input is larger than 14 number
+  */
+  e.target.value.length === 0
+    ? (msg = document.createTextNode("This field must not be empty"))
+    : e.target.value.length < 14
+    ? (msg = document.createTextNode(
+        `Phone number must be larger than ${e.target.value.length - 1} number`
+      ))
+    : (msg = document.createTextNode(
+        `Phone number must be less than 14 number`
+      ));
+
+  // if phone number is not valid show error message
+  if (localStorage.getItem("validPhoneNumber") === "false") {
+    messageContainer.appendChild(phoneMessageSpan);
+    phoneMessageSpan.append(msg);
+    phoneInput.style.border = "solid 2px #ff5454";
+  }
+  handleSubmit(false);
+});
+
 phoneInput.addEventListener("focus", (e) => {
-  localStorage.setItem(
-    "validPhoneNumber",
-    /\+\d/.test(phoneInput.value.trim())
-  );
+  localStorage.setItem("validPhoneNumber", isValidatedPhoneNumber);
 
   const arrOfElements = Array.from(e.target.parentElement.children[0].children);
   arrOfElements.forEach((element) => {
-    if (element.id === "phone-message") element.remove();
-    phoneInput.style.border = ''
+    if (element.id === "phone-message") {
+      element.textContent = "";
+      element.remove();
+    }
+    phoneInput.style.border = "";
   });
   handleSubmit(false);
 });
 
 
 
+
 //! Submit button logic
 function updateValidationLocal() {
-  localStorage.setItem(
-    "validUserName",
-    /[a-z] [a-z]/gi.test(nameInput.value.trim())
-  );
+  localStorage.setItem("validUserName", /[a-z] [a-z]/gi.test(nameInput.value.trim()));
   localStorage.setItem(
     "validEmail",
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
       emailInput.value.trim()
     )
   );
-  localStorage.setItem(
-    "validPhoneNumber",
-    /\+\d/.test(phoneInput.value.trim())
-  );
+  localStorage.setItem("validPhoneNumber", isValidatedPhoneNumber);
 }
+
 
 
 
@@ -176,6 +337,7 @@ function getSubmittedData() {
   localStorage.setItem("phoneNumber", phoneInput.value.trim());
   localStorage.setItem("step1", true);
 }
+
 
 
 
@@ -204,6 +366,29 @@ function handleSubmit(isValid = true) {
 
 
 
+
+function handleSubmitInvalidated(e) {
+  let validUserName = localStorage.getItem("validUserName"),
+  validEmail = localStorage.getItem("validEmail"),
+  validPhoneNumber = localStorage.getItem("validPhoneNumber"),
+  validations = [validUserName, validEmail, validPhoneNumber],
+  validated = 0;
+
+validations.forEach((validation) => {
+  if (validation === "true") validated++;
+});
+
+if (validated !== validations.length) {
+    setTimeout(() => {
+      e.target.classList.remove('error')
+    }, 300);
+    e.target.classList.add('error')
+  }
+}
+
+
+
+
 // Get data from local storage and put them in the inputs
 let userNameLocal = localStorage.getItem("userName");
 if (userNameLocal !== null) nameInput.value = userNameLocal;
@@ -213,8 +398,6 @@ if (emailLocal !== null) emailInput.value = emailLocal;
 
 let phoneNumberLocal = localStorage.getItem("phoneNumber");
 if (phoneNumberLocal !== null) phoneInput.value = phoneNumberLocal;
-
-
 
 // Steps logic
 const steps = document.querySelectorAll(".container .sidebar nav ul li");
@@ -236,14 +419,15 @@ if (localStorage.getItem("step2") === "true") {
   steps[3].classList.remove("blocked");
 }
 
-
-
 // Check if all inputs are validated if not don't unlock next step
 steps.forEach((step) => {
   step.addEventListener("click", () => {
     if (!step.classList.contains("blocked")) handleSubmit();
   });
 });
+
+
+
 
 steps[0].addEventListener("click", () => {
   if (!steps[0].classList.contains("blocked")) location.href = "index.html";
@@ -261,6 +445,7 @@ steps[3].addEventListener("click", () => {
 
 
 
+
 nextButton.addEventListener("click", (e) => {
   e.preventDefault();
   handleSubmit();
@@ -269,3 +454,6 @@ nextButtonMobile.addEventListener("click", (e) => {
   e.preventDefault();
   handleSubmit();
 });
+nextButton.addEventListener("click", (e) => handleSubmitInvalidated(e));
+nextButtonMobile.addEventListener("click", (e) => handleSubmitInvalidated(e));
+
