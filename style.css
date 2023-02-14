@@ -12,19 +12,9 @@ body {
   height: 100vh;
 }
 
-.test {
-  position: relative;
+:root {
+  --gray: #757575;
 }
-
-/* .test::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 40px;
-  height: 40px;
-  background-color: red;
-} */
 
 p {
   font-size: 16px;
@@ -92,7 +82,7 @@ p {
 }
 
 .container section p {
-  color: #a2a3a7;
+  color: var(--gray);
   font-size: 14px;
   margin-top: 10px;
   margin-bottom: 40px;
@@ -324,10 +314,6 @@ p {
 
 
 /* Step 1 [Start]*/
-/* .your-info-section {
-  padding: 40px 60px 10px 80px;
-  width: 100%;
-} */
 
 .your-info-section form {
   display: flex;
@@ -376,7 +362,7 @@ p {
 }
 
 .your-info-section form .input input::placeholder {
-  color: #888888;
+  color: var(--gray);
   font-size: 14px;
 }
 
@@ -587,9 +573,18 @@ p {
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
   .add-ons-section .add-ons .add {
     gap: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .add-ons-section .add-ons .add {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
 }
 
@@ -620,10 +615,22 @@ p {
   width: 270px;
 }
 
+@media (max-width: 380px) {
+  .add-ons-section .add-ons .add .text {
+    align-items: center;
+  }
+}
+
 .add-ons-section .add-ons .add .text h3 {
   color: #093162;
   font-size: 16px;
   width: 180px;
+}
+
+@media (max-width: 380px) {
+  .add-ons-section .add-ons .add .text h3 {
+    width: fit-content;
+  }
 }
 
 @media (max-width: 590px) {

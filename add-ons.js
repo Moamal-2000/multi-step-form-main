@@ -10,7 +10,7 @@ function setSelectedAddOnsToLocal() {
   let data = "";
   for (let i = 0; i < checkboxes.length; i++) {
     data += ` ${checkboxes[i].dataset.checked}`;
-    localStorage.setItem("selectedAddOns", data);
+    localStorage.setItem("selectedAddOns", data.slice(1, data.length + 1));
   }
 }
 
@@ -51,7 +51,6 @@ if (monthlySub === "false") {
 let selectedAddOns = localStorage.getItem("selectedAddOns");
 if (selectedAddOns !== null) {
   let selectedAddOnsArr = selectedAddOns.split(" ");
-  selectedAddOnsArr.shift();
 
   addOns.forEach((addOn, i) => {
     addOn.children[0].dataset.checked = selectedAddOnsArr[i];
